@@ -1,5 +1,5 @@
 import { useEffect, useState, useContext } from 'react';
-
+import './app.css';
 import UsersContext from './store/users/usersContext';
 
 function App() {
@@ -13,11 +13,17 @@ function App() {
   return (
     <div className="App">
       <pre>
-        <h1>Hello</h1>
         <button onClick={getUser}>Get User</button>
-        {usersContext.loading
-          ? 'loading...'
-          : usersContext.users.map((user) => <li>{user.name.first}</li>)}
+        {usersContext.loading ? (
+          <h1>loading...</h1>
+        ) : (
+          usersContext.users.map((user) => (
+            <li>
+              <img src={user.picture.large}></img>
+              <p>{user.name.first}</p>
+            </li>
+          ))
+        )}
       </pre>
       {/* <img src={userData[0].picture.medium}></img> */}
     </div>
