@@ -1,23 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
+import { useEffect, useState, useContext } from 'react';
+
+import UsersContext from './store/users/usersContext';
 
 function App() {
+  const usersContext = useContext(UsersContext);
+
+  const getUser = async () => {
+    await usersContext.getUser();
+  };
+  useEffect(() => {}, []);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <pre>
+        <h1>Hello</h1>
+        <button onClick={getUser}>Get User</button>
+        {usersContext.loading
+          ? 'loading...'
+          : usersContext.users.map((user) => <li>{user.name.first}</li>)}
+      </pre>
+      {/* <img src={userData[0].picture.medium}></img> */}
     </div>
   );
 }
